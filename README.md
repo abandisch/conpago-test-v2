@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Conpago Coding Task - Front End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Here is a demo of what the single page app should to once the this task is completed: https://vimeo.com/584754584
 
-In the project directory, you can run:
+Create a single page app with React and Redux (for state management) that will query the openlibrary.org API to search books for a specified author. The app should list the number of results returned by the API, as well as list the top 10 book titles (the API endpoint will limit the results to 10).
 
-### `yarn start`
+Note: No styling is required, as we are only looking at how you implement the solution and not at the UI.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Requirements
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Create a new single page app with React (create-react-app) and setup Redux to handle the state of the app
+2. Have a text box for the user to type in the author name
+3. Have a search button for the user to submit to start the search
+4. Show a "loading" text when the api is being queried
+5. After a user types in an author name and presses the search button, do a GET request to the API to get the total number of results, as well as any book titles for the specified author (see API Details below).
+6. Show the total number of results, as well as the book titles retrieved from the API on the page.
 
-### `yarn test`
+Note: Feel free to use any http client you’re comfortable with, e.g. axios, fetch etc.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## API Details
 
-### `yarn build`
+### Endpoint
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The API endpoint is as follows:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+https://openlibrary.org/search.json?limit=10&fields=title&author=AUTHOR_NAME_HERE
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You will need to substitute in "AUTHOR_NAME_HERE" for the name of the author that the user is searching for. E.g. if the user is searching for the author name "tolkien", then the API endpoint becomes: https://openlibrary.org/search.json?limit=10&fields=title&author=tolkien.
 
-### `yarn eject`
+You will need to do a GET request using the constructed endpoint to retrieve the search results.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Response body
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+An example of the response body will look like the below. You will need the numFound and docs fields to complete this task.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+{
+    "numFound": 296,
+    "start": 0,
+    "numFoundExact": true,
+    "docs": [
+        { "title": "The Hobbit" },
+        { "title": "The Fellowship of the Ring" },
+        { "title": "The Two Towers" },
+        { "title": "The Return of the King" },
+        { "title": "The Lord of the Rings" },
+        { "title": "The Silmarillion" },
+        { "title": "Farmer Giles of Ham" },
+        { "title": "The Book of Lost Tales, Part One" },
+        { "title": "Unfinished tales of Numenor and Middle-earth" },
+        { "title": "Narn i ch\u00een H\u00farin" }
+    ],
+    "num_found": 296,
+    "q": "",
+    "offset": null
+}
+```
