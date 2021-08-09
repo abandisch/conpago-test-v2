@@ -2,7 +2,7 @@
 
 ## Overview
 
-Here is a demo of what the single page app should to once the this task is completed: https://vimeo.com/584754584
+Here is a demo of what the single page app should do once the this task is completed: https://vimeo.com/584754584
 
 Create a single page app with React and Redux (for state management) that will query the openlibrary.org API to search books for a specified author. The app should list the number of results returned by the API, as well as list the top 10 book titles (the API endpoint will limit the results to 10).
 
